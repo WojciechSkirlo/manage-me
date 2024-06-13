@@ -3,7 +3,7 @@
     import Sidebar from "$lib/System/Sidebar.svelte";
 </script>
 
-<div class="bg-gray-200">
+<div class="bg-gra-100">
     <div class="flex min-h-dvh main">
         <Sidebar/>
         <div class="w-px bg-blue separator"></div>

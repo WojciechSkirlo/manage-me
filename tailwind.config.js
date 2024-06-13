@@ -61,8 +61,8 @@ export default {
                 },
                 vibrant: {
                     red: {
-                        DEFAULT: 'blue',
-                        dark: 'blue',
+                        DEFAULT: 'rgba(245, 49, 38, 0.40)',
+                        dark: '#FF3B30',
                     },
                     orange: {
                         DEFAULT: '#FF9500',
@@ -101,7 +101,7 @@ export default {
                         dark: '#BF5AF2',
                     },
                     pink: {
-                        DEFAULT: '#FF2D55',
+                        DEFAULT: 'rgba(245, 35, 75, 1)',
                         dark: '#FF375F',
                     },
                     brown: {
@@ -112,8 +112,54 @@ export default {
                         DEFAULT: '#8E8E93',
                         dark: '#98989D',
                     },
+                },
+                text: {
+                    primary: {
+                        DEFAULT: 'rgba(0, 0, 0, 0.85)',
+                        dark: 'rgba(255, 255, 255, 0.85)',
+                    },
+                    secondary: {
+                        DEFAULT: 'rgba(0, 0, 0, 0.50)',
+                        dark: 'rgba(0, 0, 0, 0.55)',
+                    },
+                    tertiary: {
+                        DEFAULT: 'rgba(0, 0, 0, 0.25)',
+                        dark: 'rgba(0, 0, 0, 0.25)',
+                    },
+                    quaternary: {
+                        DEFAULT: 'rgba(0, 0, 0, 0.10)',
+                        dark: 'rgba(0, 0, 0, 0.10)',
+                    },
+                },
+                fills: {
+                    primary: {
+                        DEFAULT: 'rgba(0, 0, 0, 0.10)',
+                        dark: 'rgba(255, 255, 255, 0.10)',
+                    },
+                    secondary: {
+                        DEFAULT: 'rgba(0, 0, 0, 0.08)',
+                        dark: 'rgba(0, 0, 0, 0.08)',
+                    },
+                    tertiary: {
+                        DEFAULT: 'rgba(0, 0, 0, 0.05)',
+                        dark: 'rgba(0, 0, 0, 0.05)',
+                    },
+                    quaternary: {
+                        DEFAULT: 'rgba(0, 0, 0, 0.03)',
+                        dark: 'rgba(0, 0, 0, 0.03)',
+                    },
                 }
             },
+            fontSize: {
+                '2xs': ['10px', '13px'],
+                xs: ['11px', '14px'],
+                sm: ['12px', '15px'],
+                base: ['13px', '16px'],
+                lg: ['15px', '20px'],
+                xl: ['17px', '22px'],
+                '2xl': ['22px', '26px'],
+                '3xl': ['26px', '32px'],
+            }
         },
     },
     plugins: [],
