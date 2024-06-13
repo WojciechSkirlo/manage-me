@@ -1,2 +1,3 @@
-<!--<h1>Welcome to SveltasdadeKit</h1>-->
-<!--<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>-->
+<div class="px-6 flex items-center py-2 h-[68px]">
+	<h1 class="text-3xl font-bold">What’s My SERP</h1>
+</div>
