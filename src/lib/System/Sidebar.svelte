@@ -1,7 +1,18 @@
 <script>
 	import { page } from '$app/stores';
-	import { Folder, Icon, MagnifyingGlass, PlusCircle, Inbox, CalendarDays, CheckCircle, Squares2x2 } from 'svelte-hero-icons';
+	import {
+		CalendarDays,
+		CheckCircle,
+		Folder,
+		Icon,
+		Inbox,
+		MagnifyingGlass,
+		PlusCircle,
+		Squares2x2,
+		Bars2
+	} from 'svelte-hero-icons';
 	import UIBadge from '$lib/UI/Badge.svelte';
+	import UIButton from '$lib/UI/Button.svelte';
 
 	let currentPath = '';
 
@@ -25,7 +36,9 @@
 
 <div>
 	<div class="flex h-full flex-col w-64 relative sidebar">
-		<div class="h-13"></div>
+		<div class="h-13 flex justify-end items-center px-3">
+			<UIButton icon={Bars2} />
+		</div>
 		<div class="flex-1 px-3 flex flex-col gap-2">
 			<div class="h-9 flex items-center">
 				<button class="flex items-center gap-1 text-vibrant-pink p-1 font-semibold text-[13px]">

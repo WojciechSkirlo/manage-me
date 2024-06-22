@@ -161,6 +161,9 @@ export default {
                 '3xl': ['26px', '32px'],
             }
         },
+        dropShadow: {
+            DEFAULT: '0 1px 4px rgba(0, 0, 0, 0.05)',
+        }
     },
     plugins: [],
 }

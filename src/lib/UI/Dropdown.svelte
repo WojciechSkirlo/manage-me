@@ -1,7 +1,7 @@
 <script>
-	// import { goto } from '@sveltejs/kit/navigation';
 	import { goto } from '$app/navigation';
-	import Button from '$lib/UI/Button.svelte';
+	import { UserCircle } from 'svelte-hero-icons';
+	import UIButton from '$lib/UI/Button.svelte';
 
 	let open = false;
 
@@ -10,13 +10,13 @@
 	}
 
 	function handleLogout() {
-		goto('/sign-in')
+		goto('/sign-in');
 		console.log('Logout');
 	}
 </script>
 
 <div class="relative">
-	<Button on:click={handleClick} />
+	<UIButton icon={UserCircle} on:click={handleClick} />
 
 	{#if open}
 		<div class="w-44 absolute right-0 top-full rounded-[5px] bg-stone-100">
