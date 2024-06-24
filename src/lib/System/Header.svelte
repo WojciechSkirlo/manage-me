@@ -1,15 +1,65 @@
-<script>
-	import { Sun } from 'svelte-hero-icons';
+<script lang="ts">
+	import { browser } from '$app/environment';
+	import { user } from '../../stores';
+	import { Moon, Sun } from 'svelte-hero-icons';
+	import { goto } from '$app/navigation';
 	import UIDropdown from '$lib/UI/Dropdown.svelte';
+	import UIDropdownItem from '$lib/UI/DropdownItem.svelte';
 	import UIButton from '$lib/UI/Button.svelte';
+
+	let theme: 'light' | 'dark' = 'light';
+
+	$: icon = theme === 'light' ? Sun : Moon;
+
+	function changeTheme() {
+		theme = theme === 'light' ? 'dark' : 'light';
+
+		if (theme === 'dark') {
+			document.documentElement.classList.add('dark');
+			localStorage.setItem('theme', 'dark');
+		} else {
+			document.documentElement.classList.remove('dark');
+			localStorage.setItem('theme', 'light');
+		}
+	}
+
+	if (browser) {
+		if (
+			localStorage.theme === 'dark' ||
+			(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+		) {
+			document.documentElement.classList.add('dark');
+			theme = 'dark';
+		} else {
+			document.documentElement.classList.remove('dark');
+			theme = 'light';
+		}
+	}
+
+	function handleLogout() {
+		// $user.set({ loggedIn: false });
+		// console.log('Logout');
+		console.log("testt");
+
+		user.set({
+			loggedIn: false,
+			user: null
+		});
+
+		goto('/sign-in');
+	}
 </script>
 
-<header class="h-13 px-4 py-2 flex text-text-secondary font-semibold items-center justify-between">
+<header
+	class="h-13 px-4 py-2 flex text-text-secondary dark:text-text-secondary-dark font-semibold items-center justify-between">
 	<div>
 		<span>UI Flip  /  Clients  /  What’s My SERP</span>
 	</div>
 	<div class="flex gap-2">
-		<UIButton icon={Sun} />
-		<UIDropdown />
+		<UIButton icon={icon} on:click={changeTheme} />
+		<UIDropdown>
+			<UIDropdownItem>Profile</UIDropdownItem>
+			<UIDropdownItem on:click={handleLogout}>Logout</UIDropdownItem>
+		</UIDropdown>
 	</div>
 </header>

@@ -6,9 +6,10 @@
 	export let icon: typeof Folder | undefined = undefined;
 	export let text: string = '';
 	export let fill = false;
+	export let iconSolid = false;
 
 	$: variantClasses = variant === 'primary' ? 'bg-red text-white' : variant === 'secondary' ? 'text-text-secondary' : 'text-text-secondary';
-	$: fillClasses = fill ? 'w-full' : 'w-10';
+	$: fillClasses = fill ? 'w-full' : 'min-w-[40px]';
 
 	const dispatch = createEventDispatcher();
 
@@ -18,12 +19,12 @@
 </script>
 
 <button type="button"
-				class={`h-8 flex rounded-md justify-center items-center outline-none ${variantClasses} ${fillClasses}`}
+				class={`h-8 flex px-2 rounded-md justify-center items-center outline-none ${variantClasses} ${fillClasses}`}
 				on:click={onClick}>
 	{#if icon}
-		<Icon src="{icon}" solid class="w-5 h-5" />
+		<Icon src="{icon}" solid={iconSolid} class="w-5 h-5" />
 	{/if}
 	{#if text}
-		<span class="uppercase font-medium">{text}</span>
+		<span class={`uppercase mt-px font-medium ${icon ? 'ms-2' : ''}`}>{text}</span>
 	{/if}
 </button>

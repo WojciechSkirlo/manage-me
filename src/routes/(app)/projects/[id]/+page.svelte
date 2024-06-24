@@ -1,7 +1,6 @@
-<script>
+<script lang="ts">
 	import UIInput from '$lib/UI/Input.svelte';
 
-	/** @type {import('./$types').PageData} */
 	export let data;
 </script>
 
