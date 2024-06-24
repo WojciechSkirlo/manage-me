@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { user } from '../../stores';
+	import UIGroup from '$lib/UI/Group.svelte';
 	import UIInput from '$lib/UI/Input.svelte';
 	import UIButton from '$lib/UI/Button.svelte';
 
@@ -9,7 +10,9 @@
 		password: ''
 	};
 
-	function handleSignIn() {
+	function handleSubmit(e: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement; }) {
+		e.preventDefault();
+
 		user.set({
 			loggedIn: true,
 			user: {
@@ -20,6 +23,8 @@
 			}
 		});
 
+		console.log('User logged in', form);
+
 		goto('/projects/1');
 	}
 </script>
@@ -28,11 +33,15 @@
 	<div class="container flex justify-center">
 		<div class="p-5 bg-white w-96 border border-fills-primary rounded-lg drop-shadow">
 			<h1 class="text-3xl font-bold mb-4">Sign in</h1>
-			<div class="flex gap-4 flex-col mb-6">
-				<UIInput bind:value={form.email} placeholder="E-mail" />
-				<UIInput bind:value={form.password} type="password" placeholder="Password" />
-			</div>
-			<UIButton variant="primary" text="Sign in" fill on:click={handleSignIn} />
+			<form on:submit={handleSubmit}>
+				<UIGroup>
+					<UIInput bind:value={form.email} placeholder="E-mail" />
+				</UIGroup>
+				<UIGroup>
+					<UIInput bind:value={form.password} type="password" placeholder="Password" />
+				</UIGroup>
+				<UIButton type="submit" variant="primary" text="Sign in" fill />
+			</form>
 		</div>
 	</div>
 </div>

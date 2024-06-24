@@ -14,8 +14,14 @@
 	} from 'svelte-hero-icons';
 	import UIBadge from '$lib/UI/Badge.svelte';
 	import UIButton from '$lib/UI/Button.svelte';
+	import UIModal from '$lib/UI/Modal.svelte';
+	import UIInput from '$lib/UI/Input.svelte';
+	import UITextarea from '$lib/UI/Textarea.svelte';
+	import UIGroup from '$lib/UI/Group.svelte';
 
 	let currentPath = '';
+	let showProjectModal = false;
+	let showTaskModal = false;
 
 	page.subscribe(($page) => {
 		currentPath = $page.url.pathname;
@@ -33,6 +39,14 @@
 		{ id: 1, name: 'Home Projects' },
 		{ id: 2, name: 'Pixify Shop' }
 	];
+
+	function handleOpenProjectModal() {
+		showProjectModal = true;
+	}
+
+	function handleOpenTaskModal() {
+		showTaskModal = true;
+	}
 </script>
 
 <div>
@@ -43,7 +57,8 @@
 		<div class="flex-1 px-3 flex flex-col gap-2">
 			<div class="h-9 flex items-center">
 				<button
-					class="flex items-center gap-1 text-vibrant-pink dark:text-vibrant-pink-dark p-1 font-semibold text-[13px]">
+					class="flex items-center gap-1 text-vibrant-pink dark:text-vibrant-pink-dark p-1 font-semibold text-[13px]"
+					on:click={handleOpenTaskModal}>
 					<Icon src="{PlusCircle}" solid class="w-6 h-6" />
 					<span class="mt-px">Add task</span>
 				</button>
@@ -68,7 +83,7 @@
 				<div
 					class="h-7 text-text-secondary dark:text-text-secondary-dark justify-between gap-2 px-2 py-1 flex outline-none items-center mt-2">
 					<span class="text-xs font-bold">My Projects</span>
-					<button>
+					<button on:click={handleOpenProjectModal}>
 						<Icon src="{Plus}" class="w-4 h-4 text-vibrant1" />
 					</button>
 				</div>
@@ -91,6 +106,35 @@
 			</div>
 		</div>
 	</div>
+
+	<!--	Add project modal -->
+	<UIModal bind:showModal={showProjectModal} header="Add project">
+		<UIGroup>
+			<UIInput placeholder="Name" />
+		</UIGroup>
+		<UIGroup>
+			<UITextarea placeholder="Description" />
+		</UIGroup>
+		<svelte:fragment slot="footer" let:close={close}>
+			<UIButton text="Confirm" on:click={close} />
+			<UIButton text="Cancel" on:click={close} />
+		</svelte:fragment>
+	</UIModal>
+
+	<!--	Add task modal -->
+	<UIModal bind:showModal={showTaskModal} header="Add task">
+		add task
+		<!--		<UIGroup>-->
+		<!--			<UIInput placeholder="Name" />-->
+		<!--		</UIGroup>-->
+		<!--		<UIGroup>-->
+		<!--			<UITextarea placeholder="Description" />-->
+		<!--		</UIGroup>-->
+		<svelte:fragment slot="footer" let:close={close}>
+			<UIButton text="Confirm" on:click={close} />
+			<UIButton text="Cancel" on:click={close} />
+		</svelte:fragment>
+	</UIModal>
 </div>
 
 <style>

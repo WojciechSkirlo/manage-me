@@ -6,6 +6,7 @@
 	export let icon: typeof Folder | undefined = undefined;
 	export let text: string = '';
 	export let fill = false;
+	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
 	export let iconSolid = false;
 
 	$: variantClasses = variant === 'primary' ? 'bg-red text-white' : variant === 'secondary' ? 'text-text-secondary' : 'text-text-secondary';
@@ -18,7 +19,7 @@
 	}
 </script>
 
-<button type="button"
+<button {type}
 				class={`h-8 flex px-2 rounded-md justify-center items-center outline-none ${variantClasses} ${fillClasses}`}
 				on:click={onClick}>
 	{#if icon}
