@@ -7,7 +7,8 @@ export interface UserStore {
 
 export interface User {
 	_id: string;
-	name: string;
+	first_name: string;
+	last_name: string;
 	email: string;
 	role: Role;
 }

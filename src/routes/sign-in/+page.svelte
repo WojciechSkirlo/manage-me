@@ -18,7 +18,8 @@
 			user: {
 				_id: '1',
 				role: 'admin',
-				name: 'John Doe',
+				first_name: 'John',
+				last_name: 'Doe',
 				email: 'john@doe.pl'
 			}
 		});
@@ -34,11 +35,11 @@
 		<div class="p-5 bg-white w-96 border border-fills-primary rounded-lg drop-shadow">
 			<h1 class="text-3xl font-bold mb-4">Sign in</h1>
 			<form on:submit={handleSubmit}>
-				<UIGroup>
-					<UIInput bind:value={form.email} placeholder="E-mail" />
+				<UIGroup label="E-mail">
+					<UIInput bind:value={form.email} placeholder="" />
 				</UIGroup>
-				<UIGroup>
-					<UIInput bind:value={form.password} type="password" placeholder="Password" />
+				<UIGroup label="Password">
+					<UIInput bind:value={form.password} type="password" placeholder="" />
 				</UIGroup>
 				<UIButton type="submit" variant="primary" text="Sign in" fill />
 			</form>
