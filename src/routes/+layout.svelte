@@ -1,9 +1,12 @@
 <script lang="ts">
+	import axios from 'axios';
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { user } from '../stores';
 	import '../app.css';
+
+	axios.defaults.baseURL = import.meta.env.VITE_PUBLIC_API_URL
 
 	$: if (browser && !$user.loggedIn && $page.url.pathname !== '/sign-in') {
 		console.log(

@@ -1,32 +1,41 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { user } from '../../stores';
+	import type { FormModel } from '../../services/AuthService';
+	import AuthService from '../../services/AuthService';
 	import UIGroup from '$lib/UI/Group.svelte';
 	import UIInput from '$lib/UI/Input.svelte';
 	import UIButton from '$lib/UI/Button.svelte';
 
-	let form = {
+	let form: FormModel = {
 		email: '',
 		password: ''
 	};
 
-	function handleSubmit(e: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement; }) {
+	async function handleSubmit(e: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement; }) {
 		e.preventDefault();
 
-		user.set({
-			loggedIn: true,
-			user: {
-				_id: '1',
-				role: 'admin',
-				first_name: 'John',
-				last_name: 'Doe',
-				email: 'john@doe.pl'
-			}
-		});
+		try {
+			const response = await AuthService.signIn(form);
 
-		console.log('User logged in', form);
+			user.set({
+				loggedIn: true,
+				user: {
+					_id: '1',
+					role: 'admin',
+					first_name: 'John',
+					last_name: 'Doe',
+					email: 'john@doe.pl'
+				}
+			});
 
-		goto('/projects/1');
+			console.log('response', response);
+			console.log('User logged in', form);
+
+			goto('/projects/1');
+		} catch (error) {
+			console.log(error);
+		}
 	}
 </script>
 

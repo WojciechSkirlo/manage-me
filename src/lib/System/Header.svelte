@@ -10,6 +10,7 @@
 	let theme: 'light' | 'dark' = 'light';
 
 	$: icon = theme === 'light' ? Sun : Moon;
+	$: userName = $user.user?.first_name + ' ' + $user.user?.last_name;
 
 	function changeTheme() {
 		theme = theme === 'light' ? 'dark' : 'light';
@@ -39,7 +40,7 @@
 	function handleLogout() {
 		// $user.set({ loggedIn: false });
 		// console.log('Logout');
-		console.log("testt");
+		console.log('testt');
 
 		user.set({
 			loggedIn: false,
@@ -58,7 +59,7 @@
 	<div class="flex gap-2">
 		<UIButton icon={icon} on:click={changeTheme} />
 		<UIDropdown>
-			<UIDropdownItem>Profile</UIDropdownItem>
+			<UIDropdownItem>{userName}</UIDropdownItem>
 			<UIDropdownItem on:click={handleLogout}>Logout</UIDropdownItem>
 		</UIDropdown>
 	</div>
