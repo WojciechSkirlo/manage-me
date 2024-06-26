@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import axios from 'axios';
-	import { loggedIn, token, refreshToken, login } from '../../stores';
+	import { login } from '../../stores';
 	import type { FormModel } from '../../services/AuthService';
 	import AuthService from '../../services/AuthService';
 	import UIGroup from '$lib/UI/Group.svelte';
@@ -23,7 +22,7 @@
 			const _token = response.result.token;
 			const _refreshToken = response.result.refreshToken;
 
-			login(_token, _refreshToken)
+			login(_token, _refreshToken);
 
 			goto('/');
 		} catch (error: any) {
@@ -42,10 +41,10 @@
 			<h1 class="text-3xl font-bold mb-4">Sign in</h1>
 			<form on:submit={handleSubmit}>
 				<UIGroup label="E-mail" error={errors['email']}>
-					<UIInput bind:value={form.email} />
+					<UIInput bind:value={form.email} type="email" autocomplete="on"  />
 				</UIGroup>
 				<UIGroup label="Password" error={errors['password']}>
-					<UIInput bind:value={form.password} type="password" />
+					<UIInput bind:value={form.password} type="password" autocomplete="current-password" />
 				</UIGroup>
 				<UIButton type="submit" variant="primary" text="Sign in" fill />
 			</form>

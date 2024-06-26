@@ -69,9 +69,7 @@ export default class AuthController {
 			if (!refreshToken) return res.status(401).json({ errors: 'Refresh token is required' });
 
 			const decoded: any = jwt.verify(refreshToken, process.env.JWT_SECRET!);
-
-			console.log("decoded", decoded.userId);
-
+			
 			const newToken = jwt.sign({ userId: decoded.userId }, process.env.JWT_SECRET!, {
 				expiresIn: '1h'
 			});

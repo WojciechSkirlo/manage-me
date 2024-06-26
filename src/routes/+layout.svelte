@@ -5,6 +5,7 @@
 	import { page } from '$app/stores';
 	import AuthService from '../services/AuthService';
 	import { loggedIn, login } from '../stores';
+	import { theme } from '../stores/theme';
 	import '../app.css';
 	import UILoader from '$lib/UI/Loader.svelte';
 
@@ -15,6 +16,7 @@
 	} else if (browser && $loggedIn && $page.url.pathname === '/sign-in') {
 		goto('/');
 	}
+
 
 	async function fetchRefreshToken(_refreshToken: string) {
 		const response = await AuthService.refreshToken(_refreshToken);
@@ -28,6 +30,17 @@
 		axios.defaults.baseURL = import.meta.env.VITE_PUBLIC_API_URL;
 
 		if (browser) {
+			if (
+				localStorage.theme === 'dark' ||
+				(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.classList.add('dark');
+				theme.set('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+				theme.set('light');
+			}
+
 			const _refreshToken = localStorage.getItem('refreshToken');
 
 			if (_refreshToken) {

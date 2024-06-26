@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { user, logout, token, refreshToken } from '../../stores';
+	import { logout, user } from '../../stores';
+	import { theme } from '../../stores/theme';
 	import { Moon, Sun } from 'svelte-hero-icons';
 	import { goto } from '$app/navigation';
 	import UserService from '../../services/UserService';
@@ -8,33 +8,20 @@
 	import UIDropdownItem from '$lib/UI/DropdownItem.svelte';
 	import UIButton from '$lib/UI/Button.svelte';
 
-	let theme: 'light' | 'dark' = 'light';
+	// let theme: 'light' | 'dark' = 'light';
 
-	$: icon = theme === 'light' ? Sun : Moon;
+	$: icon = $theme === 'light' ? Sun : Moon;
 	$: userName = $user?.first_name + ' ' + $user?.last_name + ` (${$user?.role})`;
 
 	function changeTheme() {
-		theme = theme === 'light' ? 'dark' : 'light';
+		theme.set($theme === 'light' ? 'dark' : 'light');
 
-		if (theme === 'dark') {
+		if ($theme === 'dark') {
 			document.documentElement.classList.add('dark');
 			localStorage.setItem('theme', 'dark');
 		} else {
 			document.documentElement.classList.remove('dark');
 			localStorage.setItem('theme', 'light');
-		}
-	}
-
-	if (browser) {
-		if (
-			localStorage.theme === 'dark' ||
-			(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-		) {
-			document.documentElement.classList.add('dark');
-			theme = 'dark';
-		} else {
-			document.documentElement.classList.remove('dark');
-			theme = 'light';
 		}
 	}
 
