@@ -20,12 +20,12 @@
 
 		try {
 			const response = await AuthService.signIn(form);
-			const _token = response.result;
+			const _token = response.result.token;
 
 			token.set(_token);
 			loggedIn.set(true);
 
-			axios.defaults.headers.common['Authorization'] = token ? `Bearer ${token}` : undefined;
+			axios.defaults.headers.common['Authorization'] = _token ? `Bearer ${_token}` : undefined;
 
 			goto('/');
 		} catch (error: any) {

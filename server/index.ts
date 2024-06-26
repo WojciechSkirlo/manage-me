@@ -4,7 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './src/config/database';
 import AuthRouter from './src/routes/Auth.routes';
-// import UserRouter from './src/routes/User.routes';
+import UserRouter from './src/routes/User.routes';
 
 dotenv.config();
 connectDB();
@@ -18,7 +18,7 @@ app.use(cors());
 app.use('/api', router);
 
 router.use('/auth', AuthRouter);
-// router.use('/user', userRouter);
+router.use('/user', UserRouter);
 
 const server = http.createServer(app);
 const PORT = process.env.PORT || 4000;

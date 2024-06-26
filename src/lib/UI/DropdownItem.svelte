@@ -9,7 +9,7 @@
 </script>
 
 <li>
-	<button class="p-2" on:click={onClick}>
+	<button class="p-2 text-start" on:click={onClick}>
 		<slot />
 	</button>
 </li>

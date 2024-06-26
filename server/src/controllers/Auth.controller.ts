@@ -21,7 +21,11 @@ export default class AuthController {
 				expiresIn: '1h'
 			});
 
-			res.status(200).json({ message: 'User signed in', result: token });
+			const refreshToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, {
+				expiresIn: '7d'
+			});
+
+			res.status(200).json({ message: 'User signed in', result: { token, refreshToken }});
 		} catch {
 			res.status(500).json({ message: 'Internal server error' });
 		}
