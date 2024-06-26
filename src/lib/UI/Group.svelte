@@ -8,7 +8,7 @@
 	<div class="flex flex-col">
 		{#if label}
 			<label class="flex flex-col flex-1">
-				<span class="text-text-secondary-dark text-sm">{label}</span>
+				<span class="text-text-secondary dark:text-text-primary-dark text-sm">{label}</span>
 				<slot />
 			</label>
 		{:else}

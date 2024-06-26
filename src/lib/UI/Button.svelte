@@ -9,7 +9,7 @@
 	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
 	export let iconSolid = false;
 
-	$: variantClasses = variant === 'primary' ? 'bg-red text-white' : variant === 'secondary' ? 'text-text-secondary' : 'text-text-secondary';
+	$: variantClasses = variant === 'primary' ? 'bg-red text-white' : variant === 'secondary' ? 'text-text-secondary' : 'text-text-secondary dark:text-text-primary-dark';
 	$: fillClasses = fill ? 'w-full' : 'min-w-[40px]';
 
 	const dispatch = createEventDispatcher();

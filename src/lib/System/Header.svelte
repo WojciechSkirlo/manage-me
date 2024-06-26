@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { loggedIn, token, user } from '../../stores';
+	import { user, logout, token, refreshToken } from '../../stores';
 	import { Moon, Sun } from 'svelte-hero-icons';
 	import { goto } from '$app/navigation';
 	import UserService from '../../services/UserService';
@@ -39,11 +39,8 @@
 	}
 
 	function handleLogout() {
+		logout();
 		goto('/sign-in');
-
-		user.set(null);
-		loggedIn.set(false);
-		token.set(null);
 	}
 
 	async function fetchUser() {
@@ -60,7 +57,7 @@
 </script>
 
 <header
-	class="h-13 px-4 py-2 flex text-text-secondary dark:text-text-secondary-dark font-semibold items-center justify-between">
+	class="h-13 px-4 py-2 flex text-text-secondary dark:text-text-primary-dark font-semibold items-center justify-between">
 	<div>
 		<span>UI Flip  /  Clients  /  What’s My SERP</span>
 	</div>

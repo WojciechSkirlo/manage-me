@@ -3,13 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-    /*@font-face {*/
-    /*    font-family: 'SF Pro';*/
-    /*    font-style: normal;*/
-    /*    font-weight: 400;*/
-    /*    font-display: swap;*/
-    /*    src: url("./fonts/SF-Pro.ttf") format("truetype");*/
-    /*}*/
     @font-face {
         font-family: 'SF Pro Text';
         font-style: normal;
@@ -47,6 +40,6 @@
     }
 
     body {
-        @apply text-base text-text-primary;
+        @apply text-base text-text-primary dark:text-text-primary-dark;
     }
 }

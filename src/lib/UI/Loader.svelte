@@ -9,26 +9,17 @@
         animation: rotate 1s linear infinite
     }
 
-    .loader::before, .loader::after {
+    .loader::before {
         content: "";
         box-sizing: border-box;
         position: absolute;
         inset: 0px;
         border-radius: 50%;
-        border: 5px solid #FFF;
+        border: 5px solid #000;
         animation: prixClipFix 2s linear infinite;
     }
 
-    .loader::after {
-        inset: 8px;
-        transform: rotate3d(90, 90, 0, 180deg);
-        @apply border-pink;
-    }
-
     @keyframes rotate {
-        0% {
-            transform: rotate(0deg)
-        }
         100% {
             transform: rotate(360deg)
         }
@@ -38,11 +29,17 @@
         0% {
             clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
         }
-        50% {
+        25% {
             clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
         }
-        75%, 100% {
+        50% {
             clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
+        }
+        75% {
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%)
+        }
+        100% {
+            clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
         }
     }
 </style>

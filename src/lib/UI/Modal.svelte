@@ -18,7 +18,7 @@
 	<div on:click|stopPropagation>
 		{#if header}
 			<div class="flex items-center pt-2 pb-4">
-				<h1 class="text-3xl font-bold">{header}</h1>
+				<h1 class="text-3xl font-bold dark:text-text-primary-dark">{header}</h1>
 			</div>
 		{/if}
 		<slot />
@@ -31,9 +31,9 @@
 <style>
     dialog {
         max-width: 32em;
-        border-radius: 0.2em;
         border: none;
         padding: 0;
+        @apply rounded-lg dark:bg-fills-primary-dark;
     }
 
     dialog::backdrop {
@@ -41,7 +41,7 @@
     }
 
     dialog > div {
-        padding: 1em;
+        padding: 16px;
     }
 
     dialog[open] {
