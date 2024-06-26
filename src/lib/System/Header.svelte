@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { user } from '../../stores';
+	import { loggedIn, token, user } from '../../stores';
 	import { Moon, Sun } from 'svelte-hero-icons';
 	import { goto } from '$app/navigation';
 	import UIDropdown from '$lib/UI/Dropdown.svelte';
@@ -10,7 +10,7 @@
 	let theme: 'light' | 'dark' = 'light';
 
 	$: icon = theme === 'light' ? Sun : Moon;
-	$: userName = $user.user?.first_name + ' ' + $user.user?.last_name;
+	$: userName = $user?.first_name + ' ' + $user?.last_name;
 
 	function changeTheme() {
 		theme = theme === 'light' ? 'dark' : 'light';
@@ -38,14 +38,9 @@
 	}
 
 	function handleLogout() {
-		// $user.set({ loggedIn: false });
-		// console.log('Logout');
-		console.log('testt');
-
-		user.set({
-			loggedIn: false,
-			user: null
-		});
+		user.set(null);
+		loggedIn.set(false);
+		token.set(null);
 
 		goto('/sign-in');
 	}
