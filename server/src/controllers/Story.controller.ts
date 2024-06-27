@@ -65,7 +65,7 @@ export default class StoryController {
 
 			if (!story) return res.status(404).json({ message: 'Story not found' });
 
-			res.status(200).json({ message: 'Project updated', result: project });
+			res.status(200).json({ message: 'Story updated', result: project });
 		} catch {
 			res.status(500).json({ message: 'Internal server error' });
 		}
