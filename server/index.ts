@@ -7,6 +7,7 @@ import AuthRouter from './src/routes/Auth.routes';
 import UserRouter from './src/routes/User.routes';
 import ProjectRouter from './src/routes/Project.routes';
 import StoryRouter from './src/routes/Story.routes';
+import TaskRouter from './src/routes/Task.routes';
 
 dotenv.config();
 connectDB();
@@ -23,6 +24,7 @@ router.use('/auth', AuthRouter);
 router.use('/user', UserRouter);
 router.use('/project', ProjectRouter);
 router.use('/story', StoryRouter);
+router.use('/task', TaskRouter);
 
 const server = http.createServer(app);
 const PORT = process.env.PORT || 4000;

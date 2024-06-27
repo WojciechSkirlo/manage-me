@@ -54,7 +54,7 @@
 			toasts.add({
 				type: 'success',
 				title: response.message,
-				description: 'The project has been deleted successfully.',
+				description: 'The story has been deleted successfully.',
 				duration: 3000
 			});
 
@@ -124,9 +124,9 @@
 		try {
 			const response = await UserService.list();
 
-			options.owned_by = response.result.map((project: any) => ({
-				value: project._id,
-				label: `${project.first_name} ${project.last_name}`
+			options.owned_by = response.result.map((user: any) => ({
+				value: user._id,
+				label: `${user.first_name} ${user.last_name}`
 			}));
 		} catch (error: any) {
 			console.log('error', error);
