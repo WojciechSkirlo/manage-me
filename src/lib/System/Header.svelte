@@ -8,8 +8,6 @@
 	import UIDropdownItem from '$lib/UI/DropdownItem.svelte';
 	import UIButton from '$lib/UI/Button.svelte';
 
-	// let theme: 'light' | 'dark' = 'light';
-
 	$: icon = $theme === 'light' ? Sun : Moon;
 	$: userName = $user?.first_name + ' ' + $user?.last_name + ` (${$user?.role})`;
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { FlatToast, ToastContainer } from 'svelte-toasts';
 	import axios from 'axios';
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
@@ -16,7 +17,6 @@
 	} else if (browser && $loggedIn && $page.url.pathname === '/sign-in') {
 		goto('/');
 	}
-
 
 	async function fetchRefreshToken(_refreshToken: string) {
 		const response = await AuthService.refreshToken(_refreshToken);
@@ -56,6 +56,9 @@
 </script>
 
 {#if loaded}
+	<ToastContainer let:data={data}>
+		<FlatToast {data} />
+	</ToastContainer>
 	<slot />
 {:else}
 	<div class="w-100 bg-white dark:bg-[#000000A1] h-dvh flex justify-center items-center">

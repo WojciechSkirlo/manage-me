@@ -1,16 +1,27 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+
 	export let showModal: boolean;
 	export let header = '';
 
 	let dialog: HTMLDialogElement;
+	const dispatch = createEventDispatcher();
 
-	$: if (dialog && showModal) dialog.showModal();
+	$: if (dialog && showModal) {
+		dialog.showModal();
+		dispatch('open');
+	}
+
+	function close() {
+		showModal = false;
+		dispatch('close');
+	}
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog
 	bind:this={dialog}
-	on:close={() => (showModal = false)}
+	on:close={close}
 	on:click|self={() => dialog.close()}
 	class="w-96"
 >
@@ -23,7 +34,12 @@
 		{/if}
 		<slot />
 		<div class="flex justify-end gap-2 mt-2">
-			<slot name="footer" close={() => dialog.close()} />
+			<div class="flex-1">
+				<slot name="footer-left" close={() => dialog.close()} />
+			</div>
+			<div class="flex justify-end gap-2">
+				<slot name="footer" close={() => dialog.close()} />
+			</div>
 		</div>
 	</div>
 </dialog>

@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import connectDB from './src/config/database';
 import AuthRouter from './src/routes/Auth.routes';
 import UserRouter from './src/routes/User.routes';
+import ProjectRouter from './src/routes/Project.routes';
 
 dotenv.config();
 connectDB();
@@ -19,10 +20,10 @@ app.use('/api', router);
 
 router.use('/auth', AuthRouter);
 router.use('/user', UserRouter);
+router.use('/project', ProjectRouter);
 
 const server = http.createServer(app);
 const PORT = process.env.PORT || 4000;
-// const HOST_NAME = process.env.HOST_NAME;
 
 server.listen(PORT, () => {
 	console.log(`Server listening on port http://localhost:${PORT}`);

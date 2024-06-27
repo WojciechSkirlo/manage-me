@@ -4,17 +4,21 @@
 		Bell,
 		CalendarDays,
 		CheckCircle,
+		Cog6Tooth,
 		Folder,
 		Icon,
 		Inbox,
 		MagnifyingGlass,
 		Plus,
 		PlusCircle,
-		Squares2x2
+		Squares2x2,
+		StopCircle
 	} from 'svelte-hero-icons';
+	import type { Project } from '../../types';
 	import UIButton from '$lib/UI/Button.svelte';
 	import SystemProjectModal from '$lib/System/ProjectModal.svelte';
 	import SystemTaskModal from '$lib/System/TaskModal.svelte';
+	import ProjectService from '../../services/ProjectService';
 
 	let currentPath = '';
 	let showProjectModal = false;
@@ -32,18 +36,35 @@
 		{ name: 'Filters & Labels', icon: Squares2x2, path: '/' }
 	];
 
-	let projects = [
-		{ id: 1, name: 'Home Projects' },
-		{ id: 2, name: 'Pixify Shop' }
-	];
+	let projects: Project[] = [];
+	let selectedProject: Project | undefined;
 
-	function handleOpenProjectModal() {
+	function handleOpenProjectModal(e: Event, project?: Project) {
+		e.preventDefault();
+
+		selectedProject = project;
 		showProjectModal = true;
 	}
 
 	function handleOpenTaskModal() {
 		showTaskModal = true;
 	}
+
+	async function loadProjects() {
+		try {
+			const response = await ProjectService.list();
+
+			projects = response.result;
+		} catch (error: any) {
+			console.log('error', error);
+		}
+	}
+
+	function init() {
+		loadProjects();
+	}
+
+	init();
 </script>
 
 <div>
@@ -86,28 +107,40 @@
 				</div>
 				<div>
 					<ul class="flex flex-col gap-1">
-						{#each projects as project}
+						{#each projects as project (project._id)}
 							<li>
-								<a data-sveltekit-preload-data="tap" href={`/projects/${project.id}`}
-									 class={`h-8 px-2 py-1.5 flex items-center rounded-[5px] justify-between ${currentPath === `/projects/${project.id}` ? 'bg-fills-secondary' : ''}`}>
-									<div class="flex items-center gap-2">
-										<Icon src="{Folder}" class="w-4 h-4 text-vibrant-pink dark:text-vibrant-pink-dark" />
-										<span class="mt-px dark:text-text-primary-dark">{project.name}</span>
+								<a data-sveltekit-preload-data="tap" href={`/projects/${project._id}`}
+									 class={`h-8 px-2 py-1.5 flex items-center rounded-[5px] justify-between ${currentPath === `/projects/${project._id}` ? 'bg-fills-secondary' : ''}`}>
+									<div class="flex justify-between flex-1 gap-2">
+										<div class="flex items-center gap-2">
+											<Icon src="{Folder}" class="w-4 h-4 text-vibrant-pink dark:text-vibrant-pink-dark" />
+											<span class="mt-px dark:text-text-primary-dark">{project.name}</span>
+										</div>
+
+										<button type="button" on:click={(event) => handleOpenProjectModal(event, project)}>
+											<Icon src="{Cog6Tooth}" solid class="w-4 h-4 text-text-secondary dark:text-text-primary-dark" />
+										</button>
 									</div>
-									<!--									<UIBadge>5</UIBadge>-->
 								</a>
 							</li>
 						{/each}
+						{#if projects.length === 0}
+							<li>
+								<div class="h-8 px-2 py-1.5 flex items-center rounded-[5px] justify-between">
+									<div class="flex items-center gap-2">
+										<Icon src="{StopCircle}" class="w-4 h-4 text-vibrant-pink dark:text-vibrant-pink-dark" />
+										<span class="mt-px dark:text-text-primary-dark">No projects</span>
+									</div>
+								</div>
+							</li>
+						{/if}
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Project modal -->
-	<SystemProjectModal bind:showModal={showProjectModal} />
-
-	<!-- Add task modal -->
+	<SystemProjectModal bind:showModal={showProjectModal} project={selectedProject} on:confirm={loadProjects} />
 	<SystemTaskModal bind:showModal={showTaskModal} />
 </div>
 

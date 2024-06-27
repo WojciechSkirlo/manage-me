@@ -54,7 +54,7 @@
 		]
 	};
 
-	function confirm() {
+	function onConfirm() {
 		console.log('Task added', form);
 	}
 </script>
@@ -83,7 +83,7 @@
 	</UIGroup>
 
 	<svelte:fragment slot="footer" let:close={close}>
-		<UIButton text="Confirm" on:click={confirm} />
+		<UIButton text="Confirm" on:click={onConfirm} />
 		<UIButton text="Cancel" on:click={close} />
 	</svelte:fragment>
 </UIModal>
