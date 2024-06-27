@@ -29,9 +29,7 @@
 
 	let items = [
 		{ name: 'Home', icon: ViewfinderCircle, path: '/' },
-		{ name: 'Inbox', icon: Inbox, path: '/' },
-		{ name: 'Today', icon: CheckCircle, path: '/' },
-		{ name: 'Upcoming', icon: CalendarDays, path: '/' },
+		{ name: 'Stories', icon: CheckCircle, path: '/stories' },
 	];
 
 	let projects: Project[] = [];
@@ -84,7 +82,7 @@
 					{#each items as item}
 						<li>
 							<a data-sveltekit-preload-data="tap" href={item.path}
-								 class={`h-8 px-2 py-1.5 flex items-center rounded-[5px] justify-between`}>
+								 class={`h-8 px-2 py-1.5 flex items-center rounded-[5px] justify-between ${currentPath === item.path ? 'bg-fills-secondary' : ''}`}>
 								<div class="flex items-center gap-2">
 									<Icon src="{item.icon}" class="w-4 h-4 text-vibrant-pink dark:text-vibrant-pink-dark" />
 									<span class="mt-px dark:text-text-primary-dark">{item.name}</span>

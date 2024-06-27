@@ -12,10 +12,14 @@
 
 	let loaded = false;
 
-	$: if (browser && !$loggedIn && $page.url.pathname !== '/sign-in') {
-		goto('/sign-in');
-	} else if (browser && $loggedIn && $page.url.pathname === '/sign-in') {
-		goto('/');
+	$: {
+		if (loaded) {
+			if (browser && !$loggedIn && $page.url.pathname !== '/sign-in') {
+				goto('/sign-in');
+			} else if (browser && $loggedIn && $page.url.pathname === '/sign-in') {
+				goto('/');
+			}
+		}
 	}
 
 	async function fetchRefreshToken(_refreshToken: string) {

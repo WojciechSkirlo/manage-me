@@ -27,7 +27,9 @@ export interface FormModel {
 	name: string;
 	description: string;
 	priority: Priority;
-	project: Project | null;
+	// project: Project | null;
+	project: string;
 	status: Status;
-	owned_by: User | null;
+	// owned_by: User | null;
+	owned_by: string;
 }

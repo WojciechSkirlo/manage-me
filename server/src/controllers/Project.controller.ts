@@ -1,8 +1,5 @@
-import dotenv from 'dotenv';
 import { Request, Response } from 'express';
 import Project from '../models/Project.model';
-
-dotenv.config();
 
 export default class ProjectController {
 	public static async list(req: Request, res: Response) {
