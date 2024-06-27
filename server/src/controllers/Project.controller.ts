@@ -15,6 +15,16 @@ export default class ProjectController {
 		}
 	}
 
+	public static async get(req: Request, res: Response) {
+		try {
+			const projects = await Project.findOne({ _id: req.params.id });
+
+			res.status(200).json({ message: 'Fetched project', result: projects });
+		} catch {
+			res.status(500).json({ message: 'Internal server error' });
+		}
+	}
+
 	public static async add(req: Request, res: Response) {
 		try {
 			const { name, description } = req.body;

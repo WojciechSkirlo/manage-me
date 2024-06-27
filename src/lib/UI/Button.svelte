@@ -7,6 +7,7 @@
 	export let text: string = '';
 	export let fill = false;
 	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
+	export let title: string | undefined = undefined;
 	export let iconSolid = false;
 
 	$: variantClasses = variant === 'primary' ? 'bg-red text-white' : variant === 'secondary' ? 'text-text-secondary' : 'text-text-secondary dark:text-text-primary-dark';
@@ -19,7 +20,7 @@
 	}
 </script>
 
-<button {type}
+<button {type} {title}
 				class={`h-8 flex px-2 rounded-md justify-center items-center outline-none ${variantClasses} ${fillClasses}`}
 				on:click={onClick}>
 	{#if icon}

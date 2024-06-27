@@ -33,8 +33,17 @@ export interface Story {
 	owned_by: User;
 }
 
-export type Priority = 'low' | 'medium' | 'high';
-export type Status = 'todo' | 'doing' | 'done';
+export enum Priority {
+	LOW = 'low',
+	MEDIUM = 'medium',
+	HIGH = 'high',
+}
+
+export enum Status {
+	TODO = 'todo',
+	DOING = 'doing',
+	DONE = 'done',
+}
 
 export interface Task {
 	_id: string;

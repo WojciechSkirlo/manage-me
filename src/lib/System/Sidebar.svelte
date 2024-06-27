@@ -8,17 +8,16 @@
 		Folder,
 		Icon,
 		Inbox,
-		MagnifyingGlass,
+		ViewfinderCircle,
 		Plus,
 		PlusCircle,
-		Squares2x2,
 		StopCircle
 	} from 'svelte-hero-icons';
 	import type { Project } from '../../types';
+	import ProjectService from '../../services/ProjectService';
 	import UIButton from '$lib/UI/Button.svelte';
 	import SystemProjectModal from '$lib/System/ProjectModal.svelte';
 	import SystemTaskModal from '$lib/System/TaskModal.svelte';
-	import ProjectService from '../../services/ProjectService';
 
 	let currentPath = '';
 	let showProjectModal = false;
@@ -29,11 +28,10 @@
 	});
 
 	let items = [
-		{ name: 'Search', icon: MagnifyingGlass, path: '/' },
+		{ name: 'Home', icon: ViewfinderCircle, path: '/' },
 		{ name: 'Inbox', icon: Inbox, path: '/' },
 		{ name: 'Today', icon: CheckCircle, path: '/' },
 		{ name: 'Upcoming', icon: CalendarDays, path: '/' },
-		{ name: 'Filters & Labels', icon: Squares2x2, path: '/' }
 	];
 
 	let projects: Project[] = [];

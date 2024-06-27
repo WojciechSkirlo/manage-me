@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ProjectService from '../../services/ProjectService';
 	import UIInput from '$lib/UI/Input.svelte';
 	import UIModal from '$lib/UI/Modal.svelte';
 	import UISelect from '$lib/UI/Select.svelte';
@@ -59,7 +60,7 @@
 	}
 </script>
 
-<UIModal bind:showModal={showModal} header="Add task">
+<UIModal bind:showModal={showModal} header="Add story">
 	<UIGroup label="Name">
 		<UIInput bind:value={form.name} />
 	</UIGroup>

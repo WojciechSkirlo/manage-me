@@ -2,6 +2,10 @@ import axios from 'axios';
 import type { Resource } from '../types';
 
 export default class ProjectService {
+	public static async get(id: string): Promise<Resource<any>> {
+		return (await axios.get(`/api/project/${id}`)).data;
+	}
+
 	public static async list(): Promise<Resource<any>> {
 		return (await axios.get('/api/project/list')).data;
 	}
