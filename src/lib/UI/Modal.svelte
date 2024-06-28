@@ -49,7 +49,7 @@
         max-width: 32em;
         border: none;
         padding: 0;
-        @apply rounded-lg dark:bg-fills-primary-dark;
+        @apply rounded-lg dark:bg-gray;
     }
 
     dialog::backdrop {

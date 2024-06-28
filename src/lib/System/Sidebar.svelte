@@ -2,18 +2,17 @@
 	import { page } from '$app/stores';
 	import {
 		Bell,
-		CalendarDays,
 		CheckCircle,
 		Cog6Tooth,
 		Folder,
 		Icon,
-		Inbox,
-		ViewfinderCircle,
 		Plus,
 		PlusCircle,
-		StopCircle
+		StopCircle,
+		ViewfinderCircle
 	} from 'svelte-hero-icons';
 	import type { Project } from '../../types';
+	import { fetchProjectTasks, toggleTaskModal, isTaskModal } from '../../stores/task';
 	import ProjectService from '../../services/ProjectService';
 	import UIButton from '$lib/UI/Button.svelte';
 	import SystemProjectModal from '$lib/System/ProjectModal.svelte';
@@ -21,7 +20,6 @@
 
 	let currentPath = '';
 	let showProjectModal = false;
-	let showTaskModal = false;
 
 	page.subscribe(($page) => {
 		currentPath = $page.url.pathname;
@@ -29,7 +27,7 @@
 
 	let items = [
 		{ name: 'Home', icon: ViewfinderCircle, path: '/' },
-		{ name: 'Stories', icon: CheckCircle, path: '/stories' },
+		{ name: 'Stories', icon: CheckCircle, path: '/stories' }
 	];
 
 	let projects: Project[] = [];
@@ -43,7 +41,7 @@
 	}
 
 	function handleOpenTaskModal() {
-		showTaskModal = true;
+		toggleTaskModal();
 	}
 
 	async function loadProjects() {
@@ -53,6 +51,12 @@
 			projects = response.result;
 		} catch (error: any) {
 			console.log('error', error);
+		}
+	}
+
+	async function loadTasks() {
+		if ($page.route.id === '/(app)/projects/[id]') {
+			fetchProjectTasks($page.params.id);
 		}
 	}
 
@@ -137,7 +141,7 @@
 	</div>
 
 	<SystemProjectModal bind:showModal={showProjectModal} project={selectedProject} on:confirm={loadProjects} />
-	<SystemTaskModal bind:showModal={showTaskModal} />
+	<SystemTaskModal bind:showModal={$isTaskModal} on:confirm={loadTasks} />
 </div>
 
 <style>

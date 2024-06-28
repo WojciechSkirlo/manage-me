@@ -41,7 +41,7 @@
 			<h1 class="text-3xl font-bold mb-4">Sign in</h1>
 			<form on:submit={handleSubmit}>
 				<UIGroup label="E-mail" error={errors['email']}>
-					<UIInput bind:value={form.email} type="email" autocomplete="on"  />
+					<UIInput bind:value={form.email} type="email" autocomplete="on" />
 				</UIGroup>
 				<UIGroup label="Password" error={errors['password']}>
 					<UIInput bind:value={form.password} type="password" autocomplete="current-password" />

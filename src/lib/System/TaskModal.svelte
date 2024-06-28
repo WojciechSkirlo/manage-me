@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import { toasts } from 'svelte-toasts';
 	import TaskService, { type FormModel } from '../../services/TaskService';
+	import { editedTaskId } from '../../stores/task';
 	import StoryService from '../../services/StoryService';
 	import UserService from '../../services/UserService';
 	import { Priority, Status } from '../../types';
@@ -13,7 +14,7 @@
 	import UIButton from '$lib/UI/Button.svelte';
 
 	export let showModal = false;
-	export let id: string | undefined = undefined;
+	// export let id: string | undefined = undefined;
 
 	let form: FormModel = {
 		name: '',
@@ -44,12 +45,12 @@
 		assigned_to: []
 	};
 
-	$: editMode = !!id;
+	$: editMode = !!$editedTaskId;
 	$: header = editMode ? 'Edit task' : 'Add task';
 
 	async function onDelete(close: () => void) {
-		if (id) {
-			const response = await TaskService.delete(id);
+		if ($editedTaskId) {
+			const response = await TaskService.delete($editedTaskId);
 
 			toasts.add({
 				type: 'success',
@@ -74,8 +75,8 @@
 					description: 'The task has been added successfully.',
 					duration: 3000
 				});
-			} else if (id) {
-				const response = await TaskService.edit(id, form);
+			} else if ($editedTaskId) {
+				const response = await TaskService.edit($editedTaskId, form);
 
 				toasts.add({
 					type: 'success',
@@ -132,9 +133,6 @@
 		}
 	}
 
-	loadUsers();
-	loadStories();
-
 	function clear() {
 		form = {
 			name: '',
@@ -146,10 +144,15 @@
 			assigned_to: ''
 		};
 		errors = {};
+
+		editedTaskId.set(null);
 	}
 
 	function init() {
-		if (editMode && id) loadTask(id);
+		loadUsers();
+		loadStories();
+
+		if (editMode && $editedTaskId) loadTask($editedTaskId);
 	}
 </script>
 

@@ -133,9 +133,6 @@
 		}
 	}
 
-	loadProjects();
-	loadUsers();
-
 	function clear() {
 		form = {
 			name: '',
@@ -149,6 +146,9 @@
 	}
 
 	function init() {
+		loadProjects();
+		loadUsers();
+
 		if (editMode && id) loadStory(id);
 	}
 </script>

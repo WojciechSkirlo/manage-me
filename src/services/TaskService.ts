@@ -10,6 +10,10 @@ export default class TaskService {
 		return (await axios.get('/api/task/list')).data;
 	}
 
+	public static async getTasksByProject(id: string): Promise<Resource<any>> {
+		return (await axios.get(`/api/task/project/${id}`)).data;
+	}
+
 	public static async add(model: FormModel): Promise<Resource<any>> {
 		return (await axios.post('/api/task/add', model)).data;
 	}
